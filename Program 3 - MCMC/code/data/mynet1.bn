@@ -1,0 +1,56 @@
+variable ClassDifficulty e m h
+variable ProfQuality g m b
+variable ClassRating g m b
+variable ClassAttended below average above
+variable PsetsCompleted none half all
+variable Midterm below average above
+variable FinalGrade below average above
+
+probability ClassDifficulty
+	0.33 0.34 0.33
+
+probability ProfQuality
+	0.20 0.35 0.45
+
+probability ClassRating | ClassDifficulty ProfQuality
+	e g 0.6 0.3 0.1
+	e m 0.4 0.4 0.2
+	e b 0.3 0.4 0.3
+	m g 0.5 0.3 0.2
+	m m 0.2 0.4 0.2
+	m b 0.2 0.6 0.2
+	h g 0.4 0.4 0.2
+	h m 0.2 0.3 0.5
+	h b 0.1 0.2 0.7
+
+probability ClassAttended | ClassDifficulty ProfQuality
+	e g 0.5 0.2 0.3
+	e m 0.4 0.3 0.3 
+	e b 0.3 0.3 0.4
+	m g 0.3 0.1 0.6
+	m m 0.4 0.1 0.5
+	m b 0.5 0.1 0.4
+	h g 0.1 0.1 0.8
+	h m 0.2 0.1 0.7
+	h b 0.2 0.2 0.6
+
+probability PsetsCompleted | ClassAttended
+	below   0.3 0.3 0.4 
+	average 0.2 0.2 0.6
+	above   0.1 0.1 0.8
+
+probability Midterm | ClassAttended
+	below   0.5 0.4 0.1 
+	average 0.33 0.34 0.33
+	above   0.2 0.3 0.5
+
+probability FinalGrade | PsetsCompleted Midterm
+	none below   0.7 0.2 0.1
+	none average 0.6 0.25 0.15
+	none above   0.5 0.3 0.2
+	half below   0.5 0.3 0.2
+	half average 0.33 0.34 0.33
+	half above   0.2 0.6 0.2
+	all below    0.5 0.3 0.2
+	all average  0.3 0.5 0.2
+	all above    0.1 0.2 0.7
